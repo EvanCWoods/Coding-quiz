@@ -1,0 +1,58 @@
+* {
+    padding: 0;
+    margin: 0;
+    font-size: 16px;
+}
+body {
+    display: flex;
+    height: 100vh;
+    width: 100vw;
+}
+header {
+    display: flex;
+    position: absolute;
+    width: 100vw;
+    height: 3%;
+}
+
+button:hover {
+    cursor: pointer;
+}
+
+#high-score-button {
+    border: none;
+    background: none;
+    position: relative;
+    top: 50%;
+    left: 5%;
+    color: purple;
+}
+#timer {
+    position: relative;
+    left: 80%;
+    top: 50%;
+}
+
+#landing-page {
+    position: relative;
+    height: 100%;
+    width: 60%;
+    top: 30%;
+    left: 20%;
+    right: -20%;
+}
+.welcome-conatiner {
+    display: flex;
+    justify-content: center;
+    padding-bottom: 3%;
+}
+#welcome-title {
+    font-size: 1.5rem;
+    line-height: 2rem;
+}
+#start-game-button {
+    border: rgb(83, 0, 83);
+    background: rgb(165, 3, 165);
+    color: white;
+    padding: 1%;
+}
