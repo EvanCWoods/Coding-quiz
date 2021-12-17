@@ -2,6 +2,7 @@
     padding: 0;
     margin: 0;
     font-size: 16px;
+    list-style: none;
 }
 body {
     display: flex;
@@ -34,10 +35,6 @@ button:hover {
 }
 
 #landing-page {
-
-    display: none;
-
-
     position: relative;
     height: 100%;
     width: 60%;
@@ -62,12 +59,34 @@ button:hover {
 }
 
 #quiz {
-    /* display: none; */
+    display: none;
 
     position: relative;
-    height: 100vh;
-    width: 100vw;
-    top: 30%;
+    height: 60vh;
+    width: 60vw;
+    top: 20%;
     left: 20%;
     right: -20%;
+}
+#question-answer-container {
+    position: relative;
+    height: 100%;
+    width: 100%;
+}
+#question-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+#question {
+    font-size: 2rem;
+}
+.answer-button {
+    display: block;
+    margin-top: 1%;
+    padding: 1%;
+    border: rgb(83, 0, 83);
+    background: rgb(165, 3, 165);
+    color: white;
+    border-radius: 5px;
 }
