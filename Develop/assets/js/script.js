@@ -32,6 +32,12 @@ var questionsAndAnswers = [
     },
 ];
 
+//
+var questionIndex = Math.floor(Math.random() * questionsAndAnswers.length);     // random question from the array
+var correctAnswerIndex = Math.floor(Math.random() * 3);     //random correct answer placement
+
+var score = 0;
+
 // global variables for the timer
 var seconds = 60;
 countdown.textContent = "timer: " + seconds;
@@ -44,28 +50,14 @@ function timer() {
     }, 1000);
 }
 
-
-// Function to start the game
-function startGame() {
-    startGameButton.addEventListener("click", function() {
-        timer();        // start the timer
-
-        landingPage.style.display = "none";     // remove the landing page from view
-        setAndCheckQuestions();
-    });
+function isIncorrect() {
+    seconds -= 3;
+    console.log("Incorrect! -3 seconds");
 }
 
 
-// Function for the quiz - questions and answers
-function setAndCheckQuestions() {
-
-    var isCorrect = 0;
-    var isIncorrect = 0;
-
+function setQuestions() {
     quizPage.style.display = "flex";      // add the quiz to the view
-
-    questionIndex = Math.floor(Math.random() * questionsAndAnswers.length);     // random question from the array
-    correctAnswerIndex = Math.floor(Math.random() * 3);     //random correct answer placement
 
     question.textContent = questionsAndAnswers[questionIndex].question;
 
@@ -91,33 +83,53 @@ function setAndCheckQuestions() {
         answer3.textContent = questionsAndAnswers[questionIndex].answers.incorrect2;
         answer4.textContent = questionsAndAnswers[questionIndex].answers.correct;
     }
+}
 
+function checkAnswers() {
     answer1.addEventListener("click", function() {
-        if (answer1.textContent === questionsAndAnswers[questionIndex].answers.correct) {
-            isCorrect = true;
-            console.log(isCorrect);
-        } 
+        if (answer1.textContent == questionsAndAnswers[questionIndex].answers.correct) {
+            score += 1;
+            console.log(score);
+        } else {
+            isIncorrect();
+        }
     })
     answer2.addEventListener("click", function() {
-        if (answer2.textContent === questionsAndAnswers[questionIndex].answers.correct) {
-            isCorrect = true;
-            console.log(isCorrect);
-        } 
+        if (answer2.textContent == questionsAndAnswers[questionIndex].answers.correct) {
+            score += 1;
+            console.log(score);
+        } else {
+            isIncorrect();
+        }
     })
     answer3.addEventListener("click", function() {
-        if (answer3.textContent === questionsAndAnswers[questionIndex].answers.correct) {
-            isCorrect = true;
-            console.log(isCorrect);
-        } 
+        if (answer3.textContent == questionsAndAnswers[questionIndex].answers.correct) {
+            score += 1;
+            console.log(score);
+        } else {
+            isIncorrect();
+        }
     })
     answer4.addEventListener("click", function() {
-        if (answer4.textContent === questionsAndAnswers[questionIndex].answers.correct) {
-            isCorrect = true;
-            console.log(isCorrect);
-        } 
-    })
-    return isCorrect, isIncorrect;
+        if (answer4.textContent == questionsAndAnswers[questionIndex].answers.correct) {
+            score += 1;
+            console.log(score);
+        } else {
+            isIncorrect();
+        }
+    });
+}
 
+
+// Function to start the game
+function startGame() {
+    startGameButton.addEventListener("click", function() {
+        timer();        // start the timer
+
+        landingPage.style.display = "none";     // remove the landing page from view
+        setQuestions();
+        checkAnswers();
+    });
 }
 
 startGame();
