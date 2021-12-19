@@ -32,11 +32,8 @@ var questionsAndAnswers = [
     },
 ];
 
-//
-var questionIndex = Math.floor(Math.random() * questionsAndAnswers.length);     // random question from the array
-var correctAnswerIndex = Math.floor(Math.random() * 3);     //random correct answer placement
-
 var score = 0;
+var answeredQuestions = [];
 
 // global variables for the timer
 var seconds = 60;
@@ -44,20 +41,53 @@ countdown.textContent = "timer: " + seconds;
 
 // Function to start the timer
 function timer() {
-    setInterval(function() {
+    var interval = setInterval(function() {
         seconds -= 1;
         countdown.textContent = "timer: " + seconds;
+        console.log(seconds);
+        if (endGame()) {
+            clearInterval(interval);
+        }
+        
     }, 1000);
 }
 
+function endGame() {
+    if (seconds < 1 || answeredQuestions.length == questionsAndAnswers.length) {
+        quizPage.style.display = "none";
+        countdown.textContent = "timer: " + 0;
+        return true;
+    }
+    return true;
+}
+
 function isIncorrect() {
-    seconds -= 3;
-    console.log("Incorrect! -3 seconds");
+    seconds -= 3
 }
 
 
+// Function to set the indexes for the correct answers and check for already presented questions
+function setIndex() {
+    var questionIndex = Math.floor(Math.random() * questionsAndAnswers.length);     // random question from the array
+    var correctAnswerIndex = Math.floor(Math.random() * 3);     //random correct answer placement
+    
+    for (var i=0; i<answeredQuestions.length; i++) {
+        if (questionIndex == answeredQuestions[i]) {
+            var questionIndex = Math.floor(Math.random() * questionsAndAnswers.length);     // random question from the array
+        }
+    }
+
+    return [questionIndex, correctAnswerIndex];
+}
+
+// Function to set the questions and randomly select the correct answer index 
 function setQuestions() {
     quizPage.style.display = "flex";      // add the quiz to the view
+
+    questionIndex = setIndex()[0];
+    correctAnswerIndex = setIndex()[1];
+
+    endGame();
 
     question.textContent = questionsAndAnswers[questionIndex].question;
 
@@ -85,6 +115,8 @@ function setQuestions() {
     }
 }
 
+
+// Function to check if the answer is correct or incorrect, incrament score on correct and decrement time on incorrect
 function checkAnswers() {
     answer1.addEventListener("click", function() {
         if (answer1.textContent == questionsAndAnswers[questionIndex].answers.correct) {
@@ -93,6 +125,9 @@ function checkAnswers() {
         } else {
             isIncorrect();
         }
+        answeredQuestions.push(questionIndex);
+        console.log(answeredQuestions);
+        setQuestions();
     })
     answer2.addEventListener("click", function() {
         if (answer2.textContent == questionsAndAnswers[questionIndex].answers.correct) {
@@ -101,6 +136,9 @@ function checkAnswers() {
         } else {
             isIncorrect();
         }
+        answeredQuestions.push(questionIndex);
+        console.log(answeredQuestions);
+        setQuestions();
     })
     answer3.addEventListener("click", function() {
         if (answer3.textContent == questionsAndAnswers[questionIndex].answers.correct) {
@@ -109,6 +147,9 @@ function checkAnswers() {
         } else {
             isIncorrect();
         }
+        answeredQuestions.push(questionIndex);
+        console.log(answeredQuestions);
+        setQuestions();
     })
     answer4.addEventListener("click", function() {
         if (answer4.textContent == questionsAndAnswers[questionIndex].answers.correct) {
@@ -117,19 +158,21 @@ function checkAnswers() {
         } else {
             isIncorrect();
         }
+        answeredQuestions.push(questionIndex);
+        console.log(answeredQuestions);
+        setQuestions();
     });
 }
 
 
-// Function to start the game
-function startGame() {
+// Function to start and run the game the game
+function playGame() {
     startGameButton.addEventListener("click", function() {
         timer();        // start the timer
-
         landingPage.style.display = "none";     // remove the landing page from view
         setQuestions();
         checkAnswers();
     });
 }
 
-startGame();
+playGame();
