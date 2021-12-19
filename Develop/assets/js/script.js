@@ -9,6 +9,12 @@ var answer2 = document.getElementById("answer-2");
 var answer3 = document.getElementById("answer-3");
 var answer4 = document.getElementById("answer-4");
 
+var highScoreButton = document.getElementById("high-score-button");
+var highScorePage = document.getElementById("high-score-container");
+var highScoreValue = document.getElementById("high-score-value");
+
+var closeScoresButton = document.getElementById("close-scores-button");
+
 
 // global variable for the quesations and answers
 var questionsAndAnswers = [
@@ -52,15 +58,30 @@ function timer() {
     }, 1000);
 }
 
+function highScore() {
+    var highScore = localStorage.getItem("HighScore");
+    highScoreValue.textContent = " " + highScore;
+    highScoreButton.addEventListener("click", function() {
+        landingPage.style.display = "none";
+        quizPage.style.display = "none";
+        highScorePage.style.display = "flex";
+    });
+}
+
+
+// Function to end the game if the timer is at 0 seconds or if all questions are anwered
 function endGame() {
     if (seconds < 1 || answeredQuestions.length == questionsAndAnswers.length) {
         quizPage.style.display = "none";
         countdown.textContent = "timer: " + 0;
+        localStorage.setItem("HighScore", score);
         return true;
     }
     return true;
 }
 
+
+// Function to generate a time penalty for incorrect answers
 function isIncorrect() {
     seconds -= 3
 }
@@ -167,12 +188,17 @@ function checkAnswers() {
 
 // Function to start and run the game the game
 function playGame() {
+    highScore();
     startGameButton.addEventListener("click", function() {
         timer();        // start the timer
         landingPage.style.display = "none";     // remove the landing page from view
         setQuestions();
         checkAnswers();
     });
+    closeScoresButton.addEventListener("click", function() {
+        landingPage.style.display = "block";
+        highScorePage.style.display = "none";
+    })
 }
 
 playGame();
