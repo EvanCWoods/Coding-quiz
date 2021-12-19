@@ -39,6 +39,7 @@ var questionsAndAnswers = [
 ];
 
 var score = 0;
+var highScore = 0
 var answeredQuestions = [];
 
 // global variables for the timer
@@ -54,18 +55,19 @@ function timer() {
         if (endGame()) {
             clearInterval(interval);
         }
-        
     }, 1000);
 }
 
-function highScore() {
-    var highScore = localStorage.getItem("HighScore");
+
+function setHighScore() {
+    highScore = localStorage.getItem("HighScore");
     highScoreValue.textContent = " " + highScore;
     highScoreButton.addEventListener("click", function() {
         landingPage.style.display = "none";
         quizPage.style.display = "none";
         highScorePage.style.display = "flex";
     });
+    return highScore;
 }
 
 
@@ -74,10 +76,12 @@ function endGame() {
     if (seconds < 1 || answeredQuestions.length == questionsAndAnswers.length) {
         quizPage.style.display = "none";
         countdown.textContent = "timer: " + 0;
-        localStorage.setItem("HighScore", score);
+        if (highScore < score) {
+            localStorage.setItem("HighScore", score);
+        }
         return true;
     }
-    return true;
+    return;
 }
 
 
@@ -188,7 +192,7 @@ function checkAnswers() {
 
 // Function to start and run the game the game
 function playGame() {
-    highScore();
+    setHighScore();
     startGameButton.addEventListener("click", function() {
         timer();        // start the timer
         landingPage.style.display = "none";     // remove the landing page from view
