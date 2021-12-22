@@ -12,6 +12,7 @@ var answer4 = document.getElementById("answer-4");
 var highScoreButton = document.getElementById("high-score-button");
 var highScorePage = document.getElementById("high-score-container");
 var highScoreValue = document.getElementById("high-score-value");
+var initialsValue = document.getElementById("initials-value");
 
 var closeScoresButton = document.getElementById("close-scores-button");
 
@@ -39,7 +40,8 @@ var questionsAndAnswers = [
 ];
 
 var score = 0;
-var highScore = 0
+var highScore = 0;
+initials = 'None';
 var answeredQuestions = [];
 
 // global variables for the timer
@@ -59,9 +61,18 @@ function timer() {
 }
 
 
+function saveInitials() {
+    var initials = prompt("Save your initials with your score!");
+    localStorage.setItem("HighScore", score);
+    localStorage.setItem("Initials", initials);
+}
+
+
 function setHighScore() {
     highScore = localStorage.getItem("HighScore");
+    initials = localStorage.getItem("Initials");
     highScoreValue.textContent = " " + highScore;
+    initialsValue.textContent = initials + ":" + " ";
     highScoreButton.addEventListener("click", function() {
         landingPage.style.display = "none";
         quizPage.style.display = "none";
@@ -76,8 +87,10 @@ function endGame() {
     if (seconds < 1 || answeredQuestions.length == questionsAndAnswers.length) {
         quizPage.style.display = "none";
         countdown.textContent = "timer: " + 0;
-        if (highScore < score) {
-            localStorage.setItem("HighScore", score);
+        if (score > highScore) {
+            saveInitials();
+        } else {
+            prompt("Game Over!");
         }
         return true;
     }

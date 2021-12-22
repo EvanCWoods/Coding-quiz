@@ -131,3 +131,45 @@ button:hover {
     background: white;
     border-radius: 10px;
 }
+
+#initials-form-container {
+    display: none;
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    justify-content: center;
+}
+#initials-form {
+    position: relative;
+    top: 30%;
+    width: 50%;
+    height: 50%;    
+    display: block;
+    border-radius: 5%;
+
+    background:rgb(165, 3, 165);
+}
+#initials-form-title {
+    font-size: 1.5rem;
+    position: relative;
+    top: 40%;
+    left: 20%;
+}
+#initials-input {
+    position: relative;
+    top: 40%;
+    left: 20%;
+    height: 5%;
+    width: 25%;
+    font-size: 1rem;
+    line-height: 1rem;
+}
+#initials-submit-button {
+    position: relative;
+    top: 40%;
+    left: 20%;
+    height: 5%;
+    width: 25%;
+    font-size: 1rem;
+    line-height: 1rem;
+}
