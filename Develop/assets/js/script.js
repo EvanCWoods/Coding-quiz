@@ -62,7 +62,7 @@ function timer() {
 
 
 function saveInitials() {
-    var initials = prompt("Save your initials with your score!");
+    var initials = prompt("Congtratulations! YOu set a new high score. Save your initials with your score.");
     localStorage.setItem("HighScore", score);
     localStorage.setItem("Initials", initials);
 }
@@ -109,7 +109,7 @@ function setIndex() {
     var questionIndex = Math.floor(Math.random() * questionsAndAnswers.length);     // random question from the array
     var correctAnswerIndex = Math.floor(Math.random() * 3);     //random correct answer placement
     
-    for (var i=0; i<answeredQuestions.length; i++) {
+    for (var i=0; i<questionsAndAnswers.length; i++) {
         if (questionIndex == answeredQuestions[i]) {
             var questionIndex = Math.floor(Math.random() * questionsAndAnswers.length);     // random question from the array
         }
