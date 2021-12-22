@@ -1,23 +1,21 @@
+// Global variables for selectors to be used throughout the code
 var landingPage = document.getElementById("landing-page");
 var quizPage = document.getElementById("quiz");
 var startGameButton = document.getElementById("start-game-button");
 var countdown = document.getElementById("timer");
-
 var question = document.getElementById("question");
 var answer1 = document.getElementById("answer-1");
 var answer2 = document.getElementById("answer-2");
 var answer3 = document.getElementById("answer-3");
 var answer4 = document.getElementById("answer-4");
-
 var highScoreButton = document.getElementById("high-score-button");
 var highScorePage = document.getElementById("high-score-container");
 var highScoreValue = document.getElementById("high-score-value");
 var initialsValue = document.getElementById("initials-value");
-
 var closeScoresButton = document.getElementById("close-scores-button");
 
 
-// global variable for the quesations and answers
+// global variable for the questions and answers
 var questionsAndAnswers = [
     question1 = {
         question: "Arrays in javascript can store what variables",
@@ -37,14 +35,40 @@ var questionsAndAnswers = [
             correct: "decimals"        
         }
     },
+    question3 = {
+        question: "tWhen integrating javascript into HTML pages, the tag that is used is",
+        answers: {
+            incorrect1: "<src>",
+            incorrect2: "<code>",
+            incorrect3: "<javascript>",
+            correct: "<script>"        
+        }
+    },
+    question4 = {
+        question: "assingment of variables in javascript is done with which character",
+        answers: {
+            incorrect1: "==",
+            incorrect2: "===",
+            incorrect3: ":",
+            correct: "="        
+        }
+    },
+    question5 = {
+        question: "What method is used by web developers ato test if things are working in the console",
+        answers: {
+            incorrect1: "printToConsole()",
+            incorrect2: "print()",
+            incorrect3: "console.show()",
+            correct: "console.log()"        
+        }
+    },
 ];
 
+// Global variables for the game to run
 var score = 0;
 var highScore = 0;
-initials = 'None';
+var initials = 'None';
 var answeredQuestions = [];
-
-// global variables for the timer
 var seconds = 60;
 countdown.textContent = "timer: " + seconds;
 
@@ -53,7 +77,6 @@ function timer() {
     var interval = setInterval(function() {
         seconds -= 1;
         countdown.textContent = "timer: " + seconds;
-        console.log(seconds);
         if (endGame()) {
             clearInterval(interval);
         }
@@ -62,7 +85,7 @@ function timer() {
 
 
 function saveInitials() {
-    var initials = prompt("Congtratulations! YOu set a new high score. Save your initials with your score.");
+    var initials = prompt("Congtratulations! You set a new high score. Save your initials with your score.");
     localStorage.setItem("HighScore", score);
     localStorage.setItem("Initials", initials);
 }
@@ -98,18 +121,12 @@ function endGame() {
 }
 
 
-// Function to generate a time penalty for incorrect answers
-function isIncorrect() {
-    seconds -= 3
-}
-
-
 // Function to set the indexes for the correct answers and check for already presented questions
 function setIndex() {
     var questionIndex = Math.floor(Math.random() * questionsAndAnswers.length);     // random question from the array
     var correctAnswerIndex = Math.floor(Math.random() * 3);     //random correct answer placement
     
-    for (var i=0; i<questionsAndAnswers.length; i++) {
+    for (var i=0; i<answeredQuestions.length; i++) {
         if (questionIndex == answeredQuestions[i]) {
             var questionIndex = Math.floor(Math.random() * questionsAndAnswers.length);     // random question from the array
         }
@@ -159,45 +176,37 @@ function checkAnswers() {
     answer1.addEventListener("click", function() {
         if (answer1.textContent == questionsAndAnswers[questionIndex].answers.correct) {
             score += 1;
-            console.log(score);
         } else {
-            isIncorrect();
+            seconds -= 3;
         }
         answeredQuestions.push(questionIndex);
-        console.log(answeredQuestions);
         setQuestions();
     })
     answer2.addEventListener("click", function() {
         if (answer2.textContent == questionsAndAnswers[questionIndex].answers.correct) {
             score += 1;
-            console.log(score);
         } else {
-            isIncorrect();
+            seconds -= 3;
         }
         answeredQuestions.push(questionIndex);
-        console.log(answeredQuestions);
         setQuestions();
     })
     answer3.addEventListener("click", function() {
         if (answer3.textContent == questionsAndAnswers[questionIndex].answers.correct) {
             score += 1;
-            console.log(score);
         } else {
-            isIncorrect();
+            seconds -= 3;
         }
         answeredQuestions.push(questionIndex);
-        console.log(answeredQuestions);
         setQuestions();
     })
     answer4.addEventListener("click", function() {
         if (answer4.textContent == questionsAndAnswers[questionIndex].answers.correct) {
             score += 1;
-            console.log(score);
         } else {
-            isIncorrect();
+            seconds -= 3;
         }
         answeredQuestions.push(questionIndex);
-        console.log(answeredQuestions);
         setQuestions();
     });
 }
@@ -218,4 +227,5 @@ function playGame() {
     })
 }
 
+// Run the game
 playGame();

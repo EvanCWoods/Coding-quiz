@@ -1,0 +1,28 @@
+Notes:
+
+score:
+    - variables for wins
+    - store it in local memory
+    - if current score > last score:
+        - update huigh score in memory
+
+game:
+    - present questions
+    - check for correct answers
+    - if correct: 
+        - score + 1 (score function)
+        - remove question and answer from list (no repeats)
+    - if incorrect: 
+        - time penalty
+        - remove question and answer from list (no repeats)
+    - on answer:
+        - next question set
+    - if no more questions or no more time:
+        - form for user initials to store in memore with their score
+    
+
+
+Start Button: 
+    - start the timer
+    - start the game
+
