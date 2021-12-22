@@ -36,7 +36,7 @@ var questionsAndAnswers = [
         }
     },
     question3 = {
-        question: "tWhen integrating javascript into HTML pages, the tag that is used is",
+        question: "When integrating javascript into HTML pages, the tag that is used is",
         answers: {
             incorrect1: "<src>",
             incorrect2: "<code>",
